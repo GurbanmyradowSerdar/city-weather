@@ -1,6 +1,5 @@
 function weatherLoad(input) {
   const xHttp = new XMLHttpRequest();
-  input = input.toLowerCase();
 
   xHttp.onload = function () {
     let result = JSON.parse(this.response);
@@ -24,6 +23,9 @@ function weatherLoad(input) {
 
       let cloud = result.clouds.all;
       changeCloud(cloud);
+
+      document.getElementById("input").disabled = false;
+      button.disabled = false;
     }
   };
 
@@ -35,47 +37,54 @@ function weatherLoad(input) {
 
   xHttp.send();
 }
-
+document.body.onload = weatherLoad("ashgabat");
 let button = document.getElementById("button");
 
-// Button click SEARCH
-button.onclick = function () {
-  let input = document.getElementById("input").value;
-  if (!Number(input) && input.trim().length > 0) {
-    input = input.trim();
-
-    weatherLoad(input);
+//! Button click SEARCH
+button.onclick = search;
+document.getElementById("input").onkeydown = function (e) {
+  if (e.key === "Enter") {
+    search();
+  }
+};
+function search() {
+  let input = document.getElementById("input");
+  if (!Number(input.value) && input.value.trim().length > 0) {
+    input.value = input.value.trim();
+    input.disabled = true;
+    button.disabled = true;
+    weatherLoad(input.value.toLowerCase());
   } else {
     alert("Please write the right city");
   }
-};
+}
 
-// Change deg
+//! Change deg
 function changeDeg(deg) {
   let degBlock = document.getElementById("deg");
   degBlock.innerHTML = `${deg}°`;
 }
 
-// Change mainWeather
+//! Change mainWeather
 function changeWeather(main) {
   let block = document.getElementById("main");
   block.innerHTML = `${main}`;
 }
 
-// Change windSpeed
+//! Change windSpeed
 function wind(wind) {
   let block = document.getElementById("wind");
   block.innerHTML = `Wind ${wind}km/h`;
 }
 
-// Change icon
+//! Change icon
 function changeIcon(number) {
   let block = document.getElementById("icon");
   let icon = `http://openweathermap.org/img/wn/${number}@2x.png`;
   block.src = icon;
 }
 
-// Cloud precent
+//! Cloud precent
 function changeCloud(cloud) {
   let block = document.getElementById("cloud");
   block.innerHTML = `Cloudiness ${cloud}%`;

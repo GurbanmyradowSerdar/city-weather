@@ -10,17 +10,28 @@
   <body>
     <div class="search__box">
       <div>
-        <input type="text" placeholder="Ashgabat..." id="input" />
+        <input type="text" placeholder="ashgabat..." id="input" />
         <button id="button">Search</button>
       </div>
     </div>
     <div class="card">
       <h2 id="city">Brussels</h2>
-      <span id="main">Cloudy</span>
-      <span id="wind">Wind 10km/h</span><span class="dot">•</span
-      ><span id="cloud">Cloudiness 0%</span>
-      <h1 id="deg">23°</h1>
-      <img src="default.png" class="icon" id="icon" />
+      <div style="display: flex; align-items: center; gap: 20px">
+        <span id="main">Cloudy</span>
+        <span id="wind">Wind 10km/h</span><span class="dot">•</span
+        ><span id="cloud">Cloudiness 0%</span>
+      </div>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 20px;
+        "
+      >
+        <img src="default.png" class="icon" id="icon" />
+        <h1 id="deg">23°</h1>
+      </div>
       <table>
         <tr>
           <td>TUE</td>
